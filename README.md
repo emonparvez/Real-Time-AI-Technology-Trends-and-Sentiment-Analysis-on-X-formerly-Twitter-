@@ -1,10 +1,10 @@
 # Real-Time AI Technology Trends and Sentiment Analysis on X (formerly Twitter)
 
-## Overview
+## 📌 Overview  
 
 This project performs real-time sentiment analysis on AI-related tweets, specifically focusing on reactions to the launch of DeepSeek's open-source initiative. The project fetches tweet data using X (formerly Twitter) API, processes it, applies feature extraction techniques, and evaluates several machine learning models for sentiment classification. The models track sentiment trends and offer insights into public opinions related to AI technology.
 
-## Table of Contents
+## 📦 Table of Contents
 
 - [Project Description](#overview)
 - [Dependencies](#dependencies)
@@ -15,7 +15,6 @@ This project performs real-time sentiment analysis on AI-related tweets, specifi
 - [Model Comparison](#model-comparison)
 - [Real-Time Sentiment Tracking](#real-time-sentiment-tracking)
 - [Results and Reporting](#results-and-reporting)
-- [License](#license)
 
 ## Dependencies
 
@@ -35,8 +34,9 @@ To run this project, you need the following Python libraries:
 
 You can install them via pip:
 
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn xgboost imblearn nltk tweepy wordcloud textblob
+```python
+´pip install pandas numpy matplotlib seaborn scikit-learn xgboost imblearn nltk tweepy wordcloud textblob
+```
 
 ##Data Collection
 Fetch Tweets
@@ -44,7 +44,7 @@ We used the X (formerly Twitter) API to fetch tweet data by querying specific ke
 
 ##Access the Twitter API
 You will need to create a Twitter Developer account and generate API keys. The API is used to fetch real-time tweet data based on your chosen keyword query.
-
+```python
 `import tweepy
 
 # Your credentials here
@@ -60,6 +60,7 @@ api = tweepy.API(auth)
 
 # Query tweets
 tweets = api.search_tweets("AI technology DeepSeek open-source", lang='en', count=100)`
+```
 
 
 
@@ -79,8 +80,8 @@ import seaborn as sns
 # Visualizing sentiment distribution
 sns.countplot(data=tweet_df, x='sentiment')
 plt.show()
-
-## Feature Extraction
+```
+## 🛠️ Feature Extraction
 
 Text data was transformed into numerical representations using two methods:
 
@@ -113,9 +114,9 @@ vectorizer_tfidf = TfidfVectorizer(stop_words='english')
 # Apply to cleaned text data
 X_bow = vectorizer_bow.fit_transform(tweet_df['cleaned_text'])
 X_tfidf = vectorizer_tfidf.fit_transform(tweet_df['cleaned_text'])
+```
 
-
-## Data Preprocessing and Handling Imbalance
+## 📊 Data Preprocessing and Handling Imbalance
 
 To handle class imbalance (e.g., an overwhelming number of positive sentiments), **SMOTE (Synthetic Minority Over-sampling Technique)** was applied. SMOTE generates synthetic samples for the minority class, helping to balance the dataset and improve model performance.
 
@@ -136,7 +137,7 @@ vectorizer_tfidf = TfidfVectorizer(stop_words='english')
 # Apply to cleaned text data
 X_bow = vectorizer_bow.fit_transform(tweet_df['cleaned_text'])
 X_tfidf = vectorizer_tfidf.fit_transform(tweet_df['cleaned_text'])
-
+```
 ## Data Preprocessing and Handling Imbalance
 
 To handle the class imbalance (e.g., many positive sentiments), **SMOTE (Synthetic Minority Over-sampling Technique)** was used. SMOTE generates synthetic samples for the minority class, balancing the dataset and improving model performance.
@@ -156,7 +157,7 @@ from imblearn.over_sampling import SMOTE
 # Apply SMOTE to balance the dataset
 smote = SMOTE(random_state=42)
 X_res, y_res = smote.fit_resample(X_combined, tweet_df['sentiment'])
-
+```
 
 ## Model Comparison
 
@@ -208,32 +209,14 @@ model.fit(X_train, y_train)
 # Evaluate the model
 y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
-
+```
 ## Real-Time Sentiment Tracking
-
 The final model tracks sentiment on **real-time AI-related tweets**, providing valuable insights into public opinion trends. The results are stored in an **Excel file** for further analysis and reporting.
 
-### Saving Results to Excel
-
-```python
-import pandas as pd
-
-# Save results to an Excel file
-results = pd.DataFrame({'tweet': tweet_texts, 'sentiment': predicted_sentiments})
-results.to_excel('sentiment_results.xlsx', index=False)
-
-
-import pandas as pd
-
-# Save results to an Excel file
-results = pd.DataFrame({'tweet': tweet_texts, 'sentiment': predicted_sentiments})
-results.to_excel('sentiment_results.xlsx')
-
-
-###Results and Reporting
+## 🚀 Results and Reporting
 The model was successful in classifying tweets into positive, negative, and neutral categories. The analysis provided insights into public sentiment surrounding AI technology and the DeepSeek open-source initiative.
 
-###Example Output:
+### 🔍 Key Findings:
 Positive sentiment dominated discussions.
 Real-time sentiment analysis shows how opinions evolved after DeepSeek's launch.
 
